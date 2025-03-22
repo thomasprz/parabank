@@ -8,16 +8,25 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   reporter: 'html',
   use: {
-     baseURL: 'https://parabank.parasoft.com/',
-     trace: 'on-first-retry',
-     video: 'retain-on-failure',
-     screenshot: 'only-on-failure',
+    baseURL: 'https://parabank.parasoft.com/',
+    trace: 'on-first-retry',
+    video: 'retain-on-failure',
+    screenshot: 'only-on-failure',
   },
 
   projects: [
     {
-      name: 'chromium',
+      name: 'setup',
       use: { ...devices['Desktop Chrome'] },
+      testMatch: '**/*.setup.ts'
+    },
+    {
+      name: 'chromium',
+      use: { 
+        ...devices['Desktop Chrome'],
+        storageState: '.auth/user.json',
+      },
+      dependencies: ['setup'],
     },
   ],
 });
