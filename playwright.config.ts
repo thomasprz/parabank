@@ -1,11 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
-
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 1 : undefined,
+  globalSetup: require.resolve('./tests/utils/clean-database.ts'),
   reporter: 'html',
   use: {
     baseURL: 'https://parabank.parasoft.com/',
@@ -17,16 +17,16 @@ export default defineConfig({
   projects: [
     {
       name: 'setup',
+      testMatch: '**/*.setup.ts',
       use: { ...devices['Desktop Chrome'] },
-      testMatch: '**/*.setup.ts'
     },
     {
       name: 'chromium',
+      dependencies: ['setup'],
       use: { 
         ...devices['Desktop Chrome'],
         storageState: '.auth/user.json',
       },
-      dependencies: ['setup'],
     },
   ],
 });
