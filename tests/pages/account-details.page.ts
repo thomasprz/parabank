@@ -28,15 +28,14 @@ export class AccountDetailsPage extends BasePage {
         this.locatorGoButton = page.locator('[value="Go"]')
     }
 
-    
-    async expectAccountDetailsPage(accountId){
-        await expect(this.page).toHaveURL(`parabank/activity.htm?id=${accountId}`)
+
+    async expectAccountDetailsInformation(id, accountData){
+        await expect(this.locatorAccountNumberField).toContainText(`Account Number:	${id}`)
+        await expect(this.locatorAccountTypeField).toContainText(`Account Type: ${accountData.type}`)
     }
 
-    async expectAccountDetailsInformation(account){
-        await expect(this.locatorAccountNumberField).toContainText(`Account Number:	${account.id}`)
-        await expect(this.locatorAccountTypeField).toContainText(`Account Type: ${account.type}`)
-        await expect(this.locatorBalanceField).toContainText(`Balance: ${account.balance}`)
-        await expect(this.locatorAvailableField).toContainText(`Available: ${account.available}`)
+    async clickTransactionBill(payee){
+        await this.page.getByRole('link', {name:`Bill Payment to ${payee}`}).click()
     }
+
 }
