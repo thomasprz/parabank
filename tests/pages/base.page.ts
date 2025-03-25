@@ -11,7 +11,4 @@ export class BasePage {
         await this.page.goto(url)   
     }
 
-    async waitFor(){
-        await this.page.waitForTimeout(1000)
-    }
 }
