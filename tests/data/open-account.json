@@ -1,4 +1,6 @@
 {
     "accountCreatedHeader" : "Account Opened!",
-    "accountCreatedMessage" : "Your new account number:"
+    "accountCreatedMessage" : "Your new account number:",
+    "checkingAccount" : "CHECKING",
+    "savingsAccount" : "SAVINGS"
 }
