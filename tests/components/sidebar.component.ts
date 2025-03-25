@@ -93,4 +93,12 @@ export class SidebarComponent extends BasePage {
     async clickLogout(){
         await this.locatorLogoutLink.click()
     }
+
+    async clickAdminPage(){
+        await this.locatorAdminPageLink.click()
+    }
+    
+    async clickRegister(){
+        await this.locatorRegisterLink.click()
+    }
 }
